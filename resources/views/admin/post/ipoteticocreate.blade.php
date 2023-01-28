@@ -15,6 +15,20 @@
             <textarea name="body" class="form-control"></textarea>
         </div>
 
+        {{--Category --}}
+
+        <div class="my-3">
+            <label for="">Category</label>
+            <select class="form-control" name="category_id" id="">
+                <option value="">Seleziona la categoria</option>
+                @foreach ($categories as $elem )
+                    <option value="{{ $elem->id}} ">
+                        {{$elem->name}}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
 
         <button type="submit" class="btn btn-primary">Add Comic</button>
 

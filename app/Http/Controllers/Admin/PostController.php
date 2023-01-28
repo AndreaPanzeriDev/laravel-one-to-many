@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
@@ -26,7 +27,9 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view('admin.post.ipoteticocreate');
+        $categories= Category::all();
+
+        return view('admin.post.ipoteticocreate', compact('categories'));
     }
 
     /**
@@ -39,12 +42,17 @@ class PostController extends Controller
     {
         //
         $data = $request->all();
+
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
         $new_record = new Post();
         $new_record -> fill($data);
         $new_record->save();
 
-        $info_posts = Post::all();
-        return view('admin.post.index', compact('info_posts'));
+        return redirect()->route('admin.post.index');
     }
 
     /**
@@ -68,7 +76,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $file = Post::findOrFail($id);
-        return view('admin.post.ipoteticoedit', compact('file'));
+        $categories = Category::all();
+        return view('admin.post.ipoteticoedit', compact('file', 'categories'));
     }
 
     /**

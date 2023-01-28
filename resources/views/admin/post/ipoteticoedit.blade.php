@@ -8,12 +8,26 @@
 
     <div class="mb-3">
         <label class="form-label">Titolo</label>
-        <input name="title" type="text" class="form-control ">
+        <input name="title" type="text" class="form-control " value="{{$file->title}}">
     </div>
 
     <div class="mb-3">
         <label class="form-label">Descrizione</label>
-        <textarea name="body" class="form-control"></textarea>
+        <textarea name="body" class="form-control">{{$file->body}}</textarea>
+    </div>
+
+    {{--Category --}}
+
+    <div class="my-3">
+        <label for="">Category</label>
+        <select class="form-control" name="category_id" id="">
+            <option value="{{$file->category_id}}">Seleziona la categoria</option>
+            @foreach ($categories as $elem )
+                <option value="{{ $elem->id}} ">
+                    {{$elem->name}}
+                </option>
+            @endforeach
+        </select>
     </div>
 
 
